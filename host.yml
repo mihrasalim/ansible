@@ -1,0 +1,38 @@
+---
+- name: Install and configure Nginx
+  hosts: synnefo
+  become: yes
+  
+  tasks:
+    - name: Update APT package cache
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: Install Nginx
+      ansible.builtin.systemd:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: cpy document root/templates
+      ansible.builtin.copy:
+        src: /home/synnefo/ansible/gold
+        dest: /var/www/html/
+        owner: nginx
+        group: nginx
+        mode: '0644'
+      
+
+    - name: copy config file
+      ansible.builtin.copy:
+        src: /home/devops/ansible/nginx.conf
+        desr: /etc/nginx/conf.d/nginx.conf
+        notify: restarted
+
+  handlers:
+    - name: restarted
+      systemd:
+        name: nginx
+        state: restarted

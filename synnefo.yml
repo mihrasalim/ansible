@@ -1,0 +1,7 @@
+all:
+   hosts:
+     synnefo:
+       ansible_user: synnefo
+       ansible_host: 172.16.88.81
+       ansible_ssh_private_key_file: /home/synnefo/.ssh/id_rsa
+

@@ -1,0 +1,39 @@
+- name: Install docker and run node exporter 
+  hosts: all
+  become: true
+  collections:
+    - community.docker
+  tasks:
+    - name: Update apt cache
+      ansible.builtin.dnf:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Install docker
+      ansible.builtin.dnf:
+        name: docker.io
+        state: present
+
+    - name: Add current SSH user to docker group
+      ansible.builtin.user:
+        name: "{{ ansible_user }}"
+        groups: docker
+        append: yes
+
+    - name: Pull node exporter image
+      community.docker.docker_image:
+        name: prom/node-exporter
+        source: pull
+
+    - name: Run node exporter container with port mapping
+      community.docker.docker_container:
+        name: node_exporter
+        image: prom/node-exporter
+        state: started
+        restart_policy: unless-stopped
+        ports:
+          - "9100:9100"
+        pid_mode: host
+        volumes:
+          - "/:/host:ro,rslave"
+        command: "--path.rootfs=/host"

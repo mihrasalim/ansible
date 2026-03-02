@@ -1,0 +1,11 @@
+- name: User creation
+  hosts: synnefo
+  become: yes
+
+  tasks:
+    - name: Create user mihras
+      ansible.builtin.user:
+        name: mihras
+        state: present
+        shell: /bin/bash
+        create_home: yes
