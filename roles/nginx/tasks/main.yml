@@ -1,0 +1,14 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for role/nginx
+---
+- name: install nginx
+  dnf:
+    name: nginx
+    state: present
+
+- name: enable nginx
+  systemd: 
+    name: nginx
+    state: started
+    enabled: yes 

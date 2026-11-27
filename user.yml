@@ -1,0 +1,9 @@
+---
+- name: add a ansible_user
+  hosts: all
+  tasks:
+    - name: create a directory
+      file: 
+       name: /home/max
+       state: directory
+

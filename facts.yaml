@@ -1,0 +1,7 @@
+---
+- name: Show facts
+  hosts: all
+  tasks:
+    - name: Show server details
+      ansible.builtin.debug:
+        msg: "{{ ansible_facts['hostname'] }} runs {{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version'] }} with {{ ansible_facts['memtotal_mb'] }} MB of RAM"

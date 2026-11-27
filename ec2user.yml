@@ -1,0 +1,11 @@
+---
+
+- name: to add an user to ec2
+  hosts: ec4
+  become: true
+  tasks:
+    - name: craete user
+      user:
+        name: mihras
+        state: present
+        

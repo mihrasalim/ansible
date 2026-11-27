@@ -1,0 +1,8 @@
+---
+- name: facts
+  hosts: all
+  become: true
+  tasks:
+   - name: list the facts
+     debug:
+        msg: "{{ansible_facts['hostname']}} runs on {{ansible_facts['distribution']}} total RAM of {{ansible_facts['memtotal_mb']}} MB and system ip address is {{ansible_facts['default_ipv4']['address']}}"

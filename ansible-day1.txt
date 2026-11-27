@@ -1,0 +1,17 @@
+reason to use ansible
+
+what is ansible?
+
+how do ansible solve the problem
+
+ansible architecture : managed node and controlled node 
+
+agentless idempotent
+
+how do ansible connects each other or which service does ansible used to connect each other:
+
+inventory creation 
+simple adhoc commands: ping
+
+
+

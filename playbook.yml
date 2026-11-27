@@ -1,0 +1,14 @@
+---
+- name: My first playbook
+  hosts: all
+  become: true
+  tasks:  
+    - name: Make sure nginx is installed
+      apt:
+        name: nginx  
+        state: present
+    - name: make sure httpd is enabled and running
+      systemd:
+        name: nginx
+        state: stopped
+        enabled: no

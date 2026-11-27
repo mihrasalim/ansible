@@ -1,0 +1,31 @@
+ansible.cfg : locations of cfg files
+modules
+
+adhoc-commands- command,shell,apt/dnf,user,file.
+why do we need ansible playbook
+ansible play-book
+
+
+Module	Purpose
+ping	Check connectivity
+apt	Install packages on Debian/Ubuntu
+yum	Manage packages on older RHEL systems
+dnf	Manage packages on Fedora/RHEL
+user	Create or delete users
+group	Create or delete groups
+file	Create files and directories
+copy	Copy files to managed nodes
+service	Manage services
+command	Execute Linux commands
+shell	Execute shell commands
+debug	Display messages or variable values
+
+
+ansible.cfg privillage excalation
+[privilege_escalation]
+become = True
+become_method = sudo
+become_user = root
+become_ask_pass = True
+
+An Ansible Playbook is simply a file containing instructions that tells Ansible what tasks to perform on remote servers.

@@ -1,0 +1,32 @@
+
+---
+- name: Configure Nginx using Ansible template
+  hosts: all
+  become: true
+
+  vars_files:
+    - vars.yml
+
+  tasks:
+    - name: Install nginx
+      dnf:
+        name: nginx
+        state: present
+
+    - name: Enable and start nginx
+      systemd:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Copy the template
+      template:
+        src: /home/mihras/ansible/vars.html.j2
+        dest: /usr/share/nginx/html/index.html
+      notify: Restart nginx
+
+  handlers:
+    - name: Restart nginx
+      systemd:
+        name: nginx
+        state: restarted
